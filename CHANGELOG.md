@@ -2,11 +2,19 @@
 
 All notable user-visible changes to the Home Assistant TOS application package.
 
-## 2026.11.3-1 — 2026-11-25
+## 2026.11.3-2 — 2026-11-25
 
-Supersedes the on-hold `2026.5.4-2` submission and remediates the review
-findings **C10, C2, C3, C8, C9, T1** plus the App Center self-test result
-("online installation failed — cannot be opened").
+Supersedes the on-hold `2026.5.4-2` submission and the superseded
+`2026.11.3-1` build, and remediates the review findings **C10, C2, C3, C8,
+C9, T1** plus the App Center self-test result ("online installation failed —
+cannot be opened").
+
+- **C9 follow-up (this build):** removed every ASCII semicolon from the
+  `descript`, `important` and `release_note` values in the 23-language file.
+  The store metadata parser treats `;` as an inline INI comment, so the
+  `2026.11.3-1` build's listing description was silently truncated at the
+  first `;` and stored with a stray opening quote. The texts are otherwise
+  identical.
 
 ### Security (T1)
 - Upgraded the container image from `homeassistant/home-assistant:2026.5.4` to

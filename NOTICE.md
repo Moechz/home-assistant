@@ -1,7 +1,7 @@
 # NOTICE — third-party components and attributions
 
 This package (`homeassistantdocker`, TOS 7 Docker application, version
-`2026.11.3-1`) is an independent packaging by **Moechz** of the upstream
+`2026.11.3-2`) is an independent packaging by **Moechz** of the upstream
 **Home Assistant** project. It is not affiliated with, sponsored or endorsed by
 the Home Assistant project, the Open Home Foundation, Nabu Casa or TerraMaster.
 

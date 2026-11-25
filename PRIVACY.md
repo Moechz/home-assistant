@@ -2,7 +2,7 @@
 
 **Last updated:** 25 November 2026
 **Data controller / contact:** Moechz — moechz@163.com
-**Applies to:** version `2026.11.3-1` and later of the TOS application
+**Applies to:** version `2026.11.3-2` and later of the TOS application
 `homeassistantdocker`, the container image it runs and this repository.
 
 ## 1. Summary

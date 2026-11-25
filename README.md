@@ -157,11 +157,11 @@ network access.
 
 ```bash
 # both architectures, self-check + official -c
-bash scripts/build-dual.sh 2026.11.3-1
+bash scripts/build-dual.sh 2026.11.3-2
 
 # one architecture
-bash scripts/build.sh 2026.11.3-1 x86_64
-bash scripts/build.sh 2026.11.3-1 aarch64
+bash scripts/build.sh 2026.11.3-2 x86_64
+bash scripts/build.sh 2026.11.3-2 aarch64
 ```
 
 The build:
@@ -181,7 +181,7 @@ The build:
 
 | Gate | Command | Result |
 |---|---|---|
-| Build self-check | `scripts/build-dual.sh 2026.11.3-1` | `verify OK`, two packages |
+| Build self-check | `scripts/build-dual.sh 2026.11.3-2` | `verify OK`, two packages |
 | Official check | `TOSAppSelfTestingTool -c out/*.tar.gz` | `check passed` (x86_64 + aarch64) |
 | Runtime staging | `python3 stage.py work/home-assistant` | containers healthy, HTTP response, uid 1000 |
 
