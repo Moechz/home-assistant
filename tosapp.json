@@ -1,7 +1,7 @@
 {
   "app_id": "homeassistantdocker",
   "title": "Home Assistant",
-  "image": "homeassistant/home-assistant:2026.5.4",
+  "image": "homeassistant/home-assistant:2026.11.3",
   "repo_name": "home-assistant",
   "mode": "plain",
   "container_port": 8123,
@@ -20,61 +20,22 @@
   "auth": "Home Assistant",
   "upstream_url": "https://github.com/home-assistant/core",
   "upstream_license": "Apache-2.0",
-  "descript": "Home Assistant is a local home-automation platform: it integrates thousands of devices and services, runs automations and dashboards, and keeps all data on your NAS. This package runs the official Docker Hub image as a non-root container and keeps the configuration, database and add-on data in the application folder.",
-  "release_note": "1. First release.",
-  "important": "Open the web UI on port 8107 and create the owner account. Configuration and the SQLite database live in /Volume1/DockerAppData/homeassistantdocker/ and survive restarts and updates. The container runs as uid 1000. Some integrations that need direct hardware access may require extra devices. Needs DockerEngine; configure a registry mirror if Docker Hub is unreachable. Back up the data folder before uninstalling with data removal. Plain HTTP on the LAN.",
-  "probe": {
-    "user_in_image": "nobody",
-    "entrypoint": null,
-    "cmd": [
-      "sh",
-      "start.sh",
-      "prd"
-    ],
-    "exposed_ports": [
-      8080
-    ],
-    "declared_volumes": [],
-    "image_healthcheck": [
-      "CMD-SHELL",
-      "python healthcheck.py"
-    ],
-    "digest": "daya0576/beaverhabits@sha256:6cd7e464207369785c88cfd59f99c6cc44ec57f3a8d90c3439908da42271d69f",
-    "architecture": "x86_64",
-    "platforms": [],
-    "http_client_in_image": "",
-    "trial_run": {
-      "ok": false,
-      "http_code": "",
-      "state": "exited",
-      "paths": [],
-      "host_port": 18000,
-      "log_tail": "21, in connect\n    await_only(connection),\n    ~~~~~~~~~~^^^^^^^^^^^^\n  File \"/opt/pysetup/.venv/lib/python3.14/site-packages/sqlalchemy/util/_concurrency_py3k.py\", line 132, in await_only\n    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^\n  File \"/opt/pysetup/.venv/lib/python3.14/site-packages/sqlalchemy/util/_concurrency_py3k.py\", line 196, in greenlet_spawn\n    value = await result\n            ^^^^^^^^^^^^\n  File \"/opt/pysetup/.venv/lib/python3.14/site-packages/aiosqlite/core.py\", line 168, in _connect\n    self._connection = await future\n                       ^^^^^^^^^^^^\n  File \"/opt/pysetup/.venv/lib/python3.14/site-packages/aiosqlite/core.py\", line 63, in _connection_worker_thread\n    result = function()\n  File \"/opt/pysetup/.venv/lib/python3.14/site-packages/aiosqlite/core.py\", line 466, in connector\n    return sqlite3.connect(loc, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\nsqlalchemy.exc.OperationalError: (sqlite3.OperationalError) unable to open database file\n(Background on this error at: https://sqlalche.me/e/20/e3q8)\n\n[2026-11-10 04:59:36 +0000] [11] [ERROR] Application startup failed. Exiting.\n[2026-11-10 04:59:36 +0000] [11] [INFO] Worker exiting (pid: 11)\n[2026-11-10 04:59:36 +0000] [9] [ERROR] Worker (pid:11) exited with code 3.\n[2026-11-10 04:59:36 +0000] [9] [ERROR] Shutting down: Master\n[2026-11-10 04:59:36 +0000] [9] [ERROR] Reason: Worker failed to boot.",
-      "files_in_mounts": ""
-    },
-    "docker_hub": {},
-    "github": {
-      "owner": "daya0576",
-      "repo": "beaverhabits",
-      "description": "A self-hosted habit tracking app without \"Goals\"",
-      "license": "BSD-3-Clause",
-      "homepage": "https://beaverhabits.com/demo"
-    }
-  },
+  "descript": "Home Assistant is a local-first home-automation platform: it connects thousands of devices and services, runs automations and dashboards, and keeps your data on the NAS. This package runs the official Docker Hub image as a non-root container. Internet access is optional; by default it only fetches the alert feed, brand images and Met.no weather. Usage analytics is opt-in and off unless you enable it.",
+  "release_note": "Rectified per review comments (C10 C2 C3 C8 C9 T1): public repository with complete README, PRIVACY and NOTICE; Apache-2.0 attribution, image digests and trademark notice; privacy policy with endpoint/region disclosure and the opt-in analytics switch; rewritten zh-cn/zh-hk text; upstream image upgraded 2026.5.4 -> 2026.11.3 with a migration note; longer first-start grace so the App Center install no longer reports the app as not openable while it is still initialising.",
+  "important": "Open http://<NAS-IP>:8107 and create the owner account; the first start can take a few minutes. Configuration, database, logs and backups stay in DockerAppData/homeassistantdocker/ and survive updates. Runs as uid 1000. Needs DockerEngine and about 2 GB RAM; configure a registry mirror if Docker Hub is unreachable. Analytics is off unless you opt in (Settings > System > Analytics). Back up before upgrading: the database migrates and cannot be downgraded. Plain HTTP on the LAN.",
   "healthcheck": [
     "CMD-SHELL",
     "curl -fsS http://127.0.0.1:8123/ >/dev/null || exit 1"
   ],
-  "entrypoint_file": "src/entrypoint.sh",
   "platform": "x86_64",
   "user": "1000:1000",
   "publisher": "Moechz",
   "compose_project": "homeassistantdocker",
   "github_repo": "home-assistant",
-  "upstream_version": "2026.5.4",
+  "upstream_version": "2026.11.3",
   "release_tag_prefix": "v",
-  "version": "2026.5.4-1",
-  "help": "https://github.com/Moechz/home-assistant/issues",
+  "version": "2026.11.3-1",
+  "help": "https://github.com/Moechz/home-assistant/blob/main/PRIVACY.md",
   "official": "https://github.com/home-assistant/core",
   "license": "Apache-2.0",
   "docker_socket": false,
@@ -85,12 +46,14 @@
   ],
   "translations": {
     "zh-cn": {
-      "descript": "习惯打卡与连续天数统计，界面简洁。",
-      "important": "首次使用请打开网页完成初始化。数据保存在 DockerAppData/beaverhabitsdocker，重启和升级不会丢失。容器以 uid 1000 运行，挂载目录需对该用户可读。需要 DockerEngine；Docker Hub 不可达时先配置镜像加速。卸载并删除数据前请备份。局域网内为 HTTP。"
+      "descript": "Home Assistant 是本地优先的家庭自动化平台：接入数千种设备与服务，运行自动化与仪表盘，数据保存在 NAS 本地。本包以非 root 容器运行官方 Docker Hub 镜像。联网可选，默认仅访问告警源、品牌图标与 Met.no 天气；使用统计为选择加入，未开启时不上报。",
+      "important": "打开 http://<NAS-IP>:8107 并创建所有者账号；首次启动可能需要几分钟。配置、数据库、日志与备份保存在 DockerAppData/homeassistantdocker/，升级不丢失。容器以 uid 1000 运行。需要 DockerEngine 与约 2 GB 内存；Docker Hub 不可达时请配置镜像加速。使用统计默认关闭，可在「设置 > 系统 > 分析」开启。升级前请备份：数据库会自动迁移，无法降级。局域网内为 HTTP。",
+      "release_note": "按上轮审核意见整改（C10/C2/C3/C8/C9/T1）：仓库公开并补全 README/PRIVACY/NOTICE；补充 Apache-2.0 许可、镜像摘要与商标声明；隐私政策含第三方端点/地区披露与可选的分析开关；重写简中/繁中串稿；上游镜像由 2026.5.4 升级到 2026.11.3 并附迁移说明；延长首次启动宽限，避免安装时被判定无法打开。"
     },
     "zh-hk": {
-      "descript": "习惯打卡与连续天数统计，界面简洁。",
-      "important": "首次使用請開啟網頁完成初始化。資料保存在 DockerAppData/beaverhabitsdocker，重新啟動和升級不會遺失。容器以 uid 1000 運行，掛載目錄需對該使用者可讀。需要 DockerEngine；Docker Hub 不可達時先設定鏡像加速。解除安裝並刪除資料前請備份。區域網路內為 HTTP。"
+      "descript": "Home Assistant 是本地優先的家庭自動化平台：接入數千種裝置與服務，運行自動化與儀表板，資料保存在 NAS 本機。本包以非 root 容器運行官方 Docker Hub 映像。聯網可選，預設僅存取告警來源、品牌圖示與 Met.no 天氣；使用統計為選擇加入，未開啟時不上報。",
+      "important": "開啟 http://<NAS-IP>:8107 並建立所有者帳號；首次啟動可能需要數分鐘。設定、資料庫、日誌與備份保存在 DockerAppData/homeassistantdocker/，升級不會遺失。容器以 uid 1000 運行。需要 DockerEngine 與約 2 GB 記憶體；Docker Hub 不可達時請設定映像加速。使用統計預設關閉，可在「設定 > 系統 > 分析」開啟。升級前請備份：資料庫會自動遷移，無法降級。區域網路內為 HTTP。",
+      "release_note": "按上輪審核意見整改（C10/C2/C3/C8/C9/T1）：倉庫公開並補齊 README/PRIVACY/NOTICE；補充 Apache-2.0 授權、映像摘要與商標聲明；隱私政策含第三方端點/地區披露與可選的分析開關；重寫簡中/繁中串稿；上游映像由 2026.5.4 升級至 2026.11.3 並附遷移說明；延長首次啟動寬限，避免安裝時被判定無法開啟。"
     }
   },
   "host_port": 8107,
